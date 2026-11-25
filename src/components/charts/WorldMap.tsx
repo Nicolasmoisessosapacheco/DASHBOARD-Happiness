@@ -38,7 +38,7 @@ export function WorldMap({ data }: { data: HappinessRow[] }) {
         <Geographies geography={geoUrl}>
           {({ geographies }) =>
             geographies.map((geo) => {
-              const name = geo.properties.name as string
+              const name = geo.properties?.name as string
               const score = scoreByCountry.get(name)
               const fill = score ? colorScale(score) : "#d4d4d8"
 
@@ -50,11 +50,8 @@ export function WorldMap({ data }: { data: HappinessRow[] }) {
                     setHover(score ? `${name}: ${score.toFixed(2)}` : `${name}: sin datos`)
                   }
                   onMouseLeave={() => setHover(null)}
-                  style={{
-                    default: { fill, outline: "none" },
-                    hover: { fill: "#f97316", outline: "none" },
-                    pressed: { fill: "#ea580c", outline: "none" },
-                  }}
+                  fill={fill}
+                  style={{ outline: "none" }}
                 />
               )
             })
